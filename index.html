@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Introduction to Composer - David Mosher</title>
+
+        <meta name="description" content="">
+        <meta name="author" content="David Mosher">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link rel="stylesheet" href="revealjs/css/reveal.min.css">
+        <link rel="stylesheet" href="revealjs/css/theme/default.css" id="theme">
+
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="monokai.css">
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="revealjs/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="revealjs/lib/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <style>
+        @import url(http://fonts.googleapis.com/css?family=Open+Sans|Audiowide);
+        * {
+            font-family: 'Open Sans', sans-serif;
+        }
+        </style>
+    </head>
+
+    <body>
+        <div id="small-logo" class="hide" style="font-size: 1.2em; color: #FFF; position: absolute; bottom: 15px; left: 15px; display: none; z-index: 1000">
+            <span style="font-family: 'Open Sans'; letter-spacing: -1px">Reno <span style="color: #7878A5; font-family: 'Audiowide'; letter-spacing: -1px">php</span></span>
+        </div>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <p style="font-size: 3em; font-family: 'Open Sans'; letter-spacing: -10px">Reno <span style="color: #7878A5; font-family: 'Audiowide'; letter-spacing: -10px">php</span></p>
+                    <br>
+                    <p style="font-size: 1.8em;">Introduction to Composer</p>
+                    <p>
+                        <small><a href="http://dmwc.biz">David Mosher</a> / <a href="http://twitter.com/arenowebdev">@arenowebdev</a></small>
+                    </p>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>What Is It?</h1>
+                    </section>
+
+                    <section data-background="#19242f">
+                        <ul>
+                            <li>It was inspired by Ruby's Bundler and Node's npm<br><br></li>
+                            <li class="fragment">It is a tool for dependency management <span style="font-weight: bold; color: #b73234;">NOT</span> a package manager<br><br></li>
+                            <li class="fragment">It is cross-platform compatible (requires >= PHP 5.3.2)</li>
+                        </ul>
+                        <aside class="notes">
+                            <ul>
+                                <li>Though it does deal with "packages" or libraries, it manages them on a per-project basis. Hence, it is a dependency manager</li>
+                            </ul>
+                        </aside>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Why Use It?</h1>
+                    </section>
+
+                    <section data-background="#b73234">
+                        <ul>
+                            <li>Your project has dependencies<br><br></li>
+                            <li class="fragment">Those dependencies also have dependencies<br><br></li>
+                            <li class="fragment">Unzipping and manually moving files sucks<br><br></li>
+                            <li class="fragment">Updating those unzipped and moved files sucks more<br><br></li>
+                            <li class="fragment">Including each of those dependencies sucks the most</li>
+                        </ul>
+                    </section>
+
+                    <section data-background="#6abcdd">
+                        <p style="font-size: 3em; font-weight: bold; color: #19242f">
+                            You specify what your project needs in writing
+                        </p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Installing It</h1>
+                    </section>
+
+                    <section data-background="#19242f">
+                        <b>Locally</b> (only within your project)<br>
+                        <pre><code class="bash" data-trim>$ curl -sS http://getcomposer.org/installer | php</code></pre>
+                        <br>
+                        <b>Globally</b> (system wide - recommended)<br>
+                        <pre><code class="bash" data-trim>$ curl -sS http://getcomposer.org/installer | php
+$ sudo mv composer.phar /usr/local/bin/composer</code></pre>
+                        <aside class="notes">
+                            <ul>
+                                <li>I'm only going to cover installing it on non-windows machines.</li>
+                            </ul>
+                        </aside>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Using It</h1>
+                    </section>
+
+                    <section data-background="#19242f">
+                        <h2>The Basics</h2>
+                    </section>
+
+                    <section data-background="#6abcdd">
+                        <pre><code class="bash" data-trim>$ composer</code></pre>
+                        <pre class="fragment"><code class="bash">   ______
+  / ____/___  ____ ___  ____  ____  ________  _____
+ / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
+\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
+                    /_/
+Composer version a045ab345980bfe4a1daec1a34d345f13a281 2013-11-06 22:13:14
+
+Usage:
+  [options] command [arguments]
+
+Options:
+  --help           -h Display this help message.
+  --quiet          -q Do not output any message.
+  --verbose        -v|vv|vvv Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+  --version        -V Display this application version.
+  --ansi              Force ANSI output.
+  --no-ansi           Disable ANSI output.
+  --no-interaction -n Do not ask any interactive question.
+  --profile           Display timing and memory usage information
+  --working-dir    -d If specified, use the given directory as working directory.</code></pre>
+                    </section>
+
+                    <section data-background="#b73234">
+                        <p>Composer is smart enough to tell you when it isn't up to date</p>
+                        <pre><code class="bash" data-trim>$ composer
+Warning: This development build of composer is over 30 days old. It is
+recommended to update it by running "composer self-update" to get the
+latest version.</code></pre>
+                        <p class="fragment">Updating Composer (when installed globally)</p>
+
+                        <pre class="fragment"><code class="bash" data-trim>$ composer self-update
+Updating to version f346274f9a04ab60eec05d9c760168ad45c23a2a.
+    Downloading: 100%</code></pre>
+                    </section>
+
+                    <section data-background="#19242f">
+                        <h3>Project Setup</h3>
+                    </section>
+
+                    <section data-background="#35B832">
+                        <ul>
+                            <li>composer.json will be your projects "phonebook" of all your dependencies<br><br></li>
+                            <li class="fragment">Two ways to setup your composer.json file&hellip;</li>
+                        </ul>
+                    </section>
+
+                    <section data-background="#b73234">
+                        <ol>
+                            <li>From the command line</li>
+                            <li>Manually</li>
+                        </ol>
+
+                        <aside class="notes" data-markdown>
+                            Step out of presentation to show terminal. Walk through:
+                                * composer init
+                                * vi composer.json
+                                * Explain difference in require and require-dev
+                                * Break down version constraints:
+                                    * Exact version:
+                                            "require": {
+                                                "laravel/framework": "4.0.0"
+                                            }
+                                    * Wildcard version:
+                                            "require": {
+                                                "laravel/framework": "4.0.*"
+                                            }
+                                        (equivalant to >= 4.0, < 4.1)
+                                    * Range of versions:
+                                            "require": {
+                                                "laravel/framework": ">=4.0.0"
+                                            }
+                                        (valid values: >, >=, <, <=, !=)
+                                    * Special stuff - Tilde:
+                                            "require": {
+                                                "laravel/framework": "~4.0.0"
+                                            }
+                                        (equivalant to >= 4.0.0, < 4.1.0)
+                        </aside>
+                    </section>
+
+                    <section data-background="#19242f">
+                        <h3>Finding Packages</h3>
+                    </section>
+
+                    <section data-background="#6abcdd">
+                        <p>Packagist.org</p>
+                        <img src="https://tutsplus.s3.amazonaws.com/tutspremium/web-development/180_Laravel4/images/packagist.png">
+                    </section>
+
+                    <section data-background="#b73234">
+                        You are able to utilize your own packages hosted in version control (both private and public!)
+                        <pre><code data-trim>{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://dmosher@bitbucket.org/dmosher/presentation.git"
+        }
+    ]
+}</code></pre>
+                    </section>
+
+                    <section data-background="#19242f">
+                        <p style="font-size: 2em">Virtual Packages</p>
+                        <ul>
+                            <li class="fragment">php<br><span style="font-size: .9em">Allows you to apply constraints on the PHP version</span><br><pre><code data-trim class="bash">"php": ">=5.3.2"</code></pre><br></li>
+                            <li class="fragment">extname<br><span style="font-size: .9em">Allows requiring of PHP extensions</span><br><pre><code data-trim class="bash">"extcurl": "*"</code></pre><br></li>
+                            <li class="fragment">lib&lt;name&gt;<br><span style="font-size: .9em">Allows version constraints of PHP libraries</span><br><pre><code data-trim class="bash">"libpcre": ">=7.8"</code></pre><br></li>
+                        </ul>
+                    </section>
+
+                    <section data-background="#19242f">
+                        <img src="all-the-things.jpg">
+                        <pre><code class="bash" data-trim>$ composer install</code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Fruits of That Labor</h2>
+                        <h1>Autoloading</h1>
+                    </section>
+
+                    <section data-background="#b73234">
+                        <blockquote style="padding: 50px" cite="http://getcomposer.org/doc/00-intro.md#autoloading">"Besides downloading the libraries outlined in your composer.json file, Composer also prepares an autoload file that's capable of autoloading all of those classes in any of the libraries it downloaded."</blockquote>
+                    </section>
+
+                    <section data-background="#6abcdd" style="color: #19242f">
+                        <p>To use your dependencies in your project, simply require the autoload file as such:</p><br>
+                        <pre><code class="php" data-trim>require 'vendor/autoload.php';</code></pre><br>
+                        <p>You now have full access to any of the namespaced classes!</p>
+                    </section>
+
+                    <section data-background="#19242f">
+                        <p>You can include other files in this autoloader. There are three methods of doing so:</p>
+                        <p style="text-align: left">PSR-0<br><pre><code class="javascript" data-trim>"autoload": {
+    "psr0": { "Mosher\\Presentation\\": "src/" }
+}</code></pre></p>
+                        <p style="text-align: left">Classmap<br><pre><code class="javascript" data-trim>"autoload": {
+    "classmap": [ "lib/", "ext/library.php" ]
+}</code></pre></p>
+
+                        <p style="text-align: left">Files<br><pre><code class="javascript" data-trim>"autoload": {
+    "files": [ "ext/functions.php" ]
+}</code></pre></p>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1>Let's Build Something</h1>
+                    </section>
+                </section>
+
+                <section>
+                    <h1>Questions?</h1>
+                </section>
+
+                <section>
+                    <h1>Thank you!</h1>
+                    <p>
+                        <small><a href="http://dmwc.biz">David Mosher</a> / <a href="http://twitter.com/arenowebdev">@arenowebdev</a></small>
+                    </p>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="revealjs/lib/js/head.min.js"></script>
+        <script src="revealjs/js/reveal.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: 'linear',
+
+                // Parallax scrolling
+                parallaxBackgroundImage: 'background.jpg',
+                //'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+            Reveal.addEventListener( 'slidechanged', function(event) {
+                if (event.indexh > 0) {
+                    $('#small-logo').fadeIn('slow');
+                } else {
+                    $('#small-logo').fadeOut('fast');
+                }
+            });
+
+        </script>
+
+    </body>
+</html>
