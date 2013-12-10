@@ -38,12 +38,12 @@
 
     <body>
         <div id="small-logo" class="hide" style="font-size: 1.2em; color: #FFF; position: absolute; bottom: 15px; left: 15px; display: none; z-index: 1000">
-            <span style="font-family: 'Open Sans'; letter-spacing: -1px">Reno <span style="color: #7878A5; font-family: 'Audiowide'; letter-spacing: -1px">php</span></span>
+            <span style="font-family: 'Open Sans'; letter-spacing: -1px">Reno <span style="color: #7878A5; font-family: 'Audiowide'; letter-spacing: -1px;">php</span></span>
         </div>
         <div class="reveal">
             <div class="slides">
                 <section>
-                    <p style="font-size: 3em; font-family: 'Open Sans'; letter-spacing: -10px">Reno <span style="color: #7878A5; font-family: 'Audiowide'; letter-spacing: -10px">php</span></p>
+                    <p style="font-size: 3em; font-family: 'Open Sans'; letter-spacing: -10px">Reno <span style="color: #7878A5; font-family: 'Audiowide'; letter-spacing: -10px; text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;">php</span></p>
                     <br>
                     <p style="font-size: 1.8em;">Introduction to Composer</p>
                     <p>
@@ -57,37 +57,47 @@
                     </section>
 
                     <section data-background="#19242f">
-                        <ul>
-                            <li>It was inspired by Ruby's Bundler and Node's npm<br><br></li>
-                            <li class="fragment">It is a tool for dependency management <span style="font-weight: bold; color: #b73234;">NOT</span> a package manager<br><br></li>
-                            <li class="fragment">It is cross-platform compatible (requires >= PHP 5.3.2)</li>
-                        </ul>
-                        <aside class="notes">
-                            <ul>
-                                <li>Though it does deal with "packages" or libraries, it manages them on a per-project basis. Hence, it is a dependency manager</li>
-                            </ul>
-                        </aside>
+                        <img src="composer-logo.png" style="border: none">
+                        <blockquote style="padding: 25px">"[A] tool for dependency management in PHP"</blockquote>
+                    </section>
+
+                    <section data-background="#19242f">
+                        <blockquote style="padding: 25px">"<span style="font-weight: bold; color: #b73234;">NOT</span> a package manager"</blockquote>
+                        <br>
+                        <p class="fragment">Cross-platform compatible requiring only > PHP version 5.3.2</p>
                     </section>
                 </section>
 
                 <section>
                     <section>
-                        <h1>Why Use It?</h1>
+                        <h1>Why Should I Use It?</h1>
                     </section>
 
-                    <section data-background="#b73234">
+                    <section data-background="#6abcdd" style=" color: #19242f">
                         <ul>
-                            <li>Your project has dependencies<br><br></li>
-                            <li class="fragment">Those dependencies also have dependencies<br><br></li>
-                            <li class="fragment">Unzipping and manually moving files sucks<br><br></li>
-                            <li class="fragment">Updating those unzipped and moved files sucks more<br><br></li>
-                            <li class="fragment">Including each of those dependencies sucks the most</li>
+                            <li>Ruby (Bundler), NodeJS (npm)<br><br></li>
+                            <li class="fragment">Working with zip files sucks and increases risk<br><br></li>
+                            <li class="fragment">Opens you up to the most annoying type of security issue&hellip;</li>
                         </ul>
                     </section>
 
-                    <section data-background="#6abcdd">
-                        <p style="font-size: 3em; font-weight: bold; color: #19242f">
-                            You specify what your project needs in writing
+                    <section data-background="#b73234">
+                        <p style="font-size: 3em; font-weight: bold;">
+                            Ones that have already been patched!
+                        </p>
+                    </section>
+
+                    <section data-background="#35B832">
+                        <ul>
+                            <li>Decreases development time<br><br></li>
+                            <li class="fragment">Easy access to libraries leads to more people re-using existing code<br><br></li>
+                            <li class="fragment">Automatic dependency management encourages developers to publish new packages while relying on old (DRY)<br><br></li>
+                        </ul>
+                    </section>
+
+                    <section data-background="#b73234">
+                        <p style="font-size: 3em; font-weight: bold;">
+                            You specify what your project needs are <em>in writing</em>
                         </p>
                     </section>
                 </section>
@@ -101,9 +111,11 @@
                         <b>Locally</b> (only within your project)<br>
                         <pre><code class="bash" data-trim>$ curl -sS http://getcomposer.org/installer | php</code></pre>
                         <br>
-                        <b>Globally</b> (system wide - recommended)<br>
-                        <pre><code class="bash" data-trim>$ curl -sS http://getcomposer.org/installer | php
-$ sudo mv composer.phar /usr/local/bin/composer</code></pre>
+                        <div class="fragment">
+                            <b>Globally</b> (system wide - recommended)<br>
+                            <pre><code class="bash" data-trim>$ curl -sS http://getcomposer.org/installer | php
+    $ sudo mv composer.phar /usr/local/bin/composer</code></pre>
+                        </div>
                         <aside class="notes">
                             <ul>
                                 <li>I'm only going to cover installing it on non-windows machines.</li>
@@ -117,98 +129,50 @@ $ sudo mv composer.phar /usr/local/bin/composer</code></pre>
                         <h1>Using It</h1>
                     </section>
 
-                    <section data-background="#19242f">
-                        <h2>The Basics</h2>
-                    </section>
-
                     <section data-background="#6abcdd">
-                        <pre><code class="bash" data-trim>$ composer</code></pre>
-                        <pre class="fragment"><code class="bash">   ______
-  / ____/___  ____ ___  ____  ____  ________  _____
- / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
-/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
-\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
-                    /_/
-Composer version a045ab345980bfe4a1daec1a34d345f13a281 2013-11-06 22:13:14
+                        <h2>The Basics</h2>
+                        <div class="fragment">
+                            <pre><code class="bash" data-trim>$ composer --version</code></pre>
+                        </div>
 
-Usage:
-  [options] command [arguments]
-
-Options:
-  --help           -h Display this help message.
-  --quiet          -q Do not output any message.
-  --verbose        -v|vv|vvv Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
-  --version        -V Display this application version.
-  --ansi              Force ANSI output.
-  --no-ansi           Disable ANSI output.
-  --no-interaction -n Do not ask any interactive question.
-  --profile           Display timing and memory usage information
-  --working-dir    -d If specified, use the given directory as working directory.</code></pre>
-                    </section>
-
-                    <section data-background="#b73234">
-                        <p>Composer is smart enough to tell you when it isn't up to date</p>
-                        <pre><code class="bash" data-trim>$ composer
+                        <div class="fragment">
+                            <pre><code class="bash" data-trim>$ composer
 Warning: This development build of composer is over 30 days old. It is
 recommended to update it by running "composer self-update" to get the
 latest version.</code></pre>
-                        <p class="fragment">Updating Composer (when installed globally)</p>
-
-                        <pre class="fragment"><code class="bash" data-trim>$ composer self-update
-Updating to version f346274f9a04ab60eec05d9c760168ad45c23a2a.
-    Downloading: 100%</code></pre>
-                    </section>
-
-                    <section data-background="#19242f">
-                        <h3>Project Setup</h3>
-                    </section>
-
-                    <section data-background="#35B832">
-                        <ul>
-                            <li>composer.json will be your projects "phonebook" of all your dependencies<br><br></li>
-                            <li class="fragment">Two ways to setup your composer.json file&hellip;</li>
-                        </ul>
+                            <pre><code class="bash" data-trim>$ composer self-update</code></pre>
+                        </div>
                     </section>
 
                     <section data-background="#b73234">
-                        <ol>
-                            <li>From the command line</li>
-                            <li>Manually</li>
-                        </ol>
-
-                        <aside class="notes" data-markdown>
-                            Step out of presentation to show terminal. Walk through:
-                                * composer init
-                                * vi composer.json
-                                * Explain difference in require and require-dev
-                                * Break down version constraints:
-                                    * Exact version:
-                                            "require": {
-                                                "laravel/framework": "4.0.0"
-                                            }
-                                    * Wildcard version:
-                                            "require": {
-                                                "laravel/framework": "4.0.*"
-                                            }
-                                        (equivalant to >= 4.0, < 4.1)
-                                    * Range of versions:
-                                            "require": {
-                                                "laravel/framework": ">=4.0.0"
-                                            }
-                                        (valid values: >, >=, <, <=, !=)
-                                    * Special stuff - Tilde:
-                                            "require": {
-                                                "laravel/framework": "~4.0.0"
-                                            }
-                                        (equivalant to >= 4.0.0, < 4.1.0)
-                        </aside>
+                        <h1>composer.json file</p>
                     </section>
 
                     <section data-background="#19242f">
-                        <h3>Finding Packages</h3>
+                        <pre><code class="jacascript" data-trim>{
+    "name": "My Simple Laravel Project",
+    "require": {
+        "laravel/laravel": "v4.0.0"
+    },
+    "authors": [
+        {
+            "name": "David Mosher",
+            "email": "dmosher@noip.com"
+        }
+    ]
+}</code></pre>
                     </section>
 
-                    <section data-background="#6abcdd">
+                    <section data-background="#19242f">
+                        <img src="all-the-things.jpg">
+                        <pre><code class="bash" data-trim>$ composer install</code></pre>
+                    </section>
+
+                    <section data-background="#b73234">
+                        <h2>Finding Packages</h2>
+                    </section>
+
+                    <section data-background="#19242f">
                         <p>Packagist.org</p>
                         <img src="https://tutsplus.s3.amazonaws.com/tutspremium/web-development/180_Laravel4/images/packagist.png">
                     </section>
@@ -225,25 +189,39 @@ Updating to version f346274f9a04ab60eec05d9c760168ad45c23a2a.
 }</code></pre>
                     </section>
 
-                    <section data-background="#19242f">
-                        <p style="font-size: 2em">Virtual Packages</p>
-                        <ul>
-                            <li class="fragment">php<br><span style="font-size: .9em">Allows you to apply constraints on the PHP version</span><br><pre><code data-trim class="bash">"php": ">=5.3.2"</code></pre><br></li>
-                            <li class="fragment">extname<br><span style="font-size: .9em">Allows requiring of PHP extensions</span><br><pre><code data-trim class="bash">"extcurl": "*"</code></pre><br></li>
-                            <li class="fragment">lib&lt;name&gt;<br><span style="font-size: .9em">Allows version constraints of PHP libraries</span><br><pre><code data-trim class="bash">"libpcre": ">=7.8"</code></pre><br></li>
+                    <section data-background="#b73234">
+                        <h2>Version Constraints</h2>
+                        <ul style="width: 500px">
+                            <li class="fragment">Exact Version<br>
+                                <pre><code>1.0.3</code></pre>
+                            </li>
+                            <li class="fragment">Range<br>
+                                <pre><code>&gt;=1.0
+&gt;=1.2,&lt;2.0</code></pre>
+                            </li>
+                            <li class="fragment">Wildcard<br>
+                                <pre><code>1.0.*</code></pre>
+                            </li>
+                            <li class="fragment">Next Significant Release<br>
+                                <pre><code>~1.2</code></pre>
+                            </li>
                         </ul>
                     </section>
 
                     <section data-background="#19242f">
-                        <img src="all-the-things.jpg">
-                        <pre><code class="bash" data-trim>$ composer install</code></pre>
+                        <p style="font-size: 2em">Platform (Virtual) Packages</p>
+                        <ul>
+                            <li class="fragment">php<br><span style="font-size: .9em">Allows you to apply constraints on the PHP version</span><br><pre><code data-trim class="bash">"php": ">=5.3.2"</code></pre><br></li>
+                            <li class="fragment">ext-name<br><span style="font-size: .9em">Allows requiring of PHP extensions</span><br><pre><code data-trim class="bash">"ext-gd": "*"</code></pre><br></li>
+                            <li class="fragment">lib-&lt;name&gt;<br><span style="font-size: .9em">Allows version constraints of PHP libraries</span><br><pre><code data-trim class="bash">"lib-curl": ">=7.3"</code></pre><br></li>
+                        </ul>
                     </section>
                 </section>
 
                 <section>
                     <section>
-                        <h2>Fruits of That Labor</h2>
-                        <h1>Autoloading</h1>
+                        <h2>Fruits of Our Labor</h2>
+                        <h1 class="fragment">Autoloading</h1>
                     </section>
 
                     <section data-background="#b73234">
@@ -251,23 +229,24 @@ Updating to version f346274f9a04ab60eec05d9c760168ad45c23a2a.
                     </section>
 
                     <section data-background="#6abcdd" style="color: #19242f">
-                        <p>To use your dependencies in your project, simply require the autoload file as such:</p><br>
                         <pre><code class="php" data-trim>require 'vendor/autoload.php';</code></pre><br>
-                        <p>You now have full access to any of the namespaced classes!</p>
+                        <p class="fragment" style="font-weight: bold">You now have full access to any of the namespaced classes!</p>
                     </section>
 
                     <section data-background="#19242f">
-                        <p>You can include other files in this autoloader. There are three methods of doing so:</p>
                         <p style="text-align: left">PSR-0<br><pre><code class="javascript" data-trim>"autoload": {
     "psr0": { "Mosher\\Presentation\\": "src/" }
 }</code></pre></p>
-                        <p style="text-align: left">Classmap<br><pre><code class="javascript" data-trim>"autoload": {
+                        <div class="fragment">
+                            <p style="text-align: left">Classmap<br><pre><code class="javascript" data-trim>"autoload": {
     "classmap": [ "lib/", "ext/library.php" ]
 }</code></pre></p>
-
-                        <p style="text-align: left">Files<br><pre><code class="javascript" data-trim>"autoload": {
+                        </div>
+                        <div class="fragment">
+                            <p style="text-align: left">Directories / Individual Files<br><pre><code class="javascript" data-trim>"autoload": {
     "files": [ "ext/functions.php" ]
 }</code></pre></p>
+                        </div>
                     </section>
                 </section>
 
@@ -275,10 +254,6 @@ Updating to version f346274f9a04ab60eec05d9c760168ad45c23a2a.
                     <section>
                         <h1>Let's Build Something</h1>
                     </section>
-                </section>
-
-                <section>
-                    <h1>Questions?</h1>
                 </section>
 
                 <section>
@@ -309,7 +284,8 @@ Updating to version f346274f9a04ab60eec05d9c760168ad45c23a2a.
                 transition: 'linear',
 
                 // Parallax scrolling
-                parallaxBackgroundImage: 'background.jpg',
+                //parallaxBackgroundImage: 'background.jpg',
+                parallaxBackgroundImage: 'http://renophp.dmwc.biz/assets/img/reno.jpg',
                 //'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
                 parallaxBackgroundSize: '2100px 900px',
 
