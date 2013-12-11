@@ -70,7 +70,7 @@
 
                 <section>
                     <section>
-                        <h1>Why Should I Use It?</h1>
+                        <h1>Why Should You Use It?</h1>
                     </section>
 
                     <section data-background="#6abcdd" style=" color: #19242f">
@@ -113,8 +113,7 @@
                         <br>
                         <div class="fragment">
                             <b>Globally</b> (system wide - recommended)<br>
-                            <pre><code class="bash" data-trim>$ curl -sS http://getcomposer.org/installer | php
-    $ sudo mv composer.phar /usr/local/bin/composer</code></pre>
+                            <pre><code class="bash" data-trim>$ sudo mv composer.phar /usr/local/bin/composer</code></pre>
                         </div>
                         <aside class="notes">
                             <ul>
@@ -204,6 +203,9 @@ latest version.</code></pre>
                             </li>
                             <li class="fragment">Next Significant Release<br>
                                 <pre><code>~1.2</code></pre>
+                                <div class="fragment">
+                                    <pre><code>~1.2.3</code></pre>
+                                </div>
                             </li>
                         </ul>
                     </section>
@@ -211,9 +213,9 @@ latest version.</code></pre>
                     <section data-background="#19242f">
                         <p style="font-size: 2em">Platform (Virtual) Packages</p>
                         <ul>
-                            <li class="fragment">php<br><span style="font-size: .9em">Allows you to apply constraints on the PHP version</span><br><pre><code data-trim class="bash">"php": ">=5.3.2"</code></pre><br></li>
-                            <li class="fragment">ext-name<br><span style="font-size: .9em">Allows requiring of PHP extensions</span><br><pre><code data-trim class="bash">"ext-gd": "*"</code></pre><br></li>
-                            <li class="fragment">lib-&lt;name&gt;<br><span style="font-size: .9em">Allows version constraints of PHP libraries</span><br><pre><code data-trim class="bash">"lib-curl": ">=7.3"</code></pre><br></li>
+                            <li class="fragment">PHP Version<br><span style="font-size: .9em">Allows you to apply constraints on the PHP version</span><br><pre><code data-trim class="bash">"php": ">=5.3.2"</code></pre><br></li>
+                            <li class="fragment">PHP Extension<br><span style="font-size: .9em">Allows requiring of PHP extensions</span><br><pre><code data-trim class="bash">"ext-gd": "*"</code></pre><br></li>
+                            <li class="fragment">PHP Library<br><span style="font-size: .9em">Allows version constraints of PHP libraries</span><br><pre><code data-trim class="bash">"lib-curl": ">=7.3"</code></pre><br></li>
                         </ul>
                     </section>
                 </section>
@@ -229,7 +231,8 @@ latest version.</code></pre>
                     </section>
 
                     <section data-background="#6abcdd" style="color: #19242f">
-                        <pre><code class="php" data-trim>require 'vendor/autoload.php';</code></pre><br>
+                        <pre><code class="php" data-trim>&lt;?php
+require 'vendor/autoload.php';</code></pre><br>
                         <p class="fragment" style="font-weight: bold">You now have full access to any of the namespaced classes!</p>
                     </section>
 
@@ -250,17 +253,19 @@ latest version.</code></pre>
                     </section>
                 </section>
 
-                <section>
+                <!-- <section>
                     <section>
                         <h1>Let's Build Something</h1>
                     </section>
-                </section>
+                </section> -->
 
-                <section>
-                    <h1>Thank you!</h1>
-                    <p>
-                        <small><a href="http://dmwc.biz">David Mosher</a> / <a href="http://twitter.com/arenowebdev">@arenowebdev</a></small>
-                    </p>
+                <section data-background="blake.jpg">
+                    <div style="position: absolute !important; top: 0px !important; right: 0px !important;">
+                        <h1>Thank you!</h1>
+                        <p>
+                            <small><a href="http://dmwc.biz" style="color: #FFF">David Mosher</a> / <a href="http://twitter.com/arenowebdev" style="color: #FFF">@arenowebdev</a></small>
+                        </p>
+                    </div>
                 </section>
 
             </div>
@@ -285,9 +290,10 @@ latest version.</code></pre>
 
                 // Parallax scrolling
                 //parallaxBackgroundImage: 'background.jpg',
-                parallaxBackgroundImage: 'http://renophp.dmwc.biz/assets/img/reno.jpg',
-                //'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-                parallaxBackgroundSize: '2100px 900px',
+                //parallaxBackgroundImage: 'http://renophp.dmwc.biz/assets/img/reno.jpg',
+                parallaxBackgroundImage: 'emerald-bay-wide.jpg',
+                //parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                parallaxBackgroundSize: '2560px 1095px',
 
                 // Optional libraries used to extend on reveal.js
                 dependencies: [
